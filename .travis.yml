@@ -14,6 +14,8 @@ jobs:
         name: $TRAVIS_TAG
         api_key:
           secure: W8N2YVAASxyv7A0d1Jedz1p/yE2F+pQg39QNHQBjSgwgMJmx5czzsS3fEW1+KfqK5ovHV5grtX3nnmciVZNbatSoDdqZKM/j4ifnUeQ+4Tk6tOmWcRWxomS8QDb+3/QeurrgZLnAFW8R9glwQnL3hgUpoTXonJJNNuKaFvHIUgCggJE+K4L+qFSfPYeo7VyhW97BMYcTRmnI2LEiD5MJgzbzzRho4Zk4BCTuO/xyD8eT2AQvnWnxg6M+v/LTEZC3l5bOXPYiqcTecFuKIwpWw+x0mBo7i/n1KTtrugL6FiFDGj8tEqrC7co3Y/YwB/MCpKEHqACBPncg3W5AK2fPybrJm7uTllR4g9pPncymf2qwTf5lgTHIGahu09wiY/iOi1v18C/de3yiJ+O0Wk3/OgDzZvG9zU+6P8s633Srv3VQI94KyiZaFcKpcX2WHGmuTccTlIg8M+IcDJanNOiM49XLtZKpFcy6yeOkuDdR499x0OFRe9ANX1zXM9/U0Dj52GUJBcYlx4asTjFMpO9TJnyx6HCTUBnuI2Yx4IN+4uvqNB26rnsdtBUDTTBZXY1X3TqmCzCaXwn0LKY+psW9TilruU0pLm4E+73TTJe18eqCiVaNfZLTmZbGu0w0im7MqfoB+Zh626dkoLDyJO14PNzy7I00bkmaivvZptZv0kY=
+        on:
+          all_branches: true
         draft: true
         overwrite: true
         skip_cleanup: true
