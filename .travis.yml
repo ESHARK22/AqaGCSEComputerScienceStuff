@@ -8,7 +8,8 @@ jobs:
       dist: jammy
 
       script:
-        - "echo Temp file used in CI > tmp.txt"
+        - mkdir out
+        - "echo Temp file used in CI > out/tmp.txt"
 
       deploy: &github_deploy_base
         provider: releases
@@ -21,7 +22,7 @@ jobs:
         overwrite: true
         skip_cleanup: true  
         file: 
-          - tmp.txt
+          - out/tmp.txt
 
     - stage: "Compile for amd64 Windows"
       arch: amd64
@@ -53,12 +54,13 @@ jobs:
       os: linux
       dist: jammy
 
-      script: 
-        - "echo Temp file used in CI > tmp.txt"
+      script:
+        - mkdir out
+        - "echo Temp file used in CI > out/tmp.txt"
       deploy:
         <<: *github_deploy_base
         draft: false
-        file: tmp.txt
+        file: out/tmp.txt
 
 
 before_deploy:
