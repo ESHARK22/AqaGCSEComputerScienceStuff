@@ -3,13 +3,14 @@ rust: nightly
 
 jobs:
   include:
-    - stage: "Compile for amd64 Windows"
-      os: windows
-      
-      script:
-        - cargo build -Z unstable-options --verbose --release --bins --out-dir ./out
+    - stage: "Setup Deploy - Github Releases"
+      os: linux
+      dist: jammy
 
-      deploy: &deploy_base
+      script:
+        - "echo Temp file used in CI > tmp.txt"
+
+      deploy: &github_deploy_base
         provider: releases
         name: $TRAVIS_TAG
         api_key:
@@ -18,22 +19,46 @@ jobs:
           all_branches: true
         draft: true
         overwrite: true
-        skip_cleanup: true
-        file_glob: true
-        file: out/*
-    
-    - stage: "Compile for amd64 GNU/Linux and deploy GitHub Release"
-      os: linux
-      dist: jammy
+        skip_cleanup: true  
+        file: 
+          - tmp.txt
+
+    - stage: "Compile for amd64 Windows"
+      arch: amd64
+      os: windows
       
       script:
         - cargo build -Z unstable-options --verbose --release --bins --out-dir ./out
-
+        - rm out/*.pdb 
+        - (Get-ChildItem -File) | Rename-Item -NewName {$_.Name -replace "^","Windows_amd64_"}
       deploy:
-        <<: *deploy_base
-        draft: false
+        <<: *github_deploy_base
         file_glob: true
         file: out/*
+    
+    - stage: "Compile for amd64 GNU/Linux"
+      arch: amd64
+      os: linux
+      dist: jammy
+
+      script:
+        - cargo build -Z unstable-options --verbose --release --bins --out-dir ./out
+        - cd out; for f in * ; do mv -- "$f" "Linux_amd64_$f" ; done
+      deploy:
+        <<: *github_deploy_base
+        file_glob: true
+        file: out/*
+
+    - stage: "Deploy - GitHub Release"
+      os: linux
+      dist: jammy
+
+      script: 
+        - "echo Temp file used in CI > tmp.txt"
+      deploy:
+        <<: *github_deploy_base
+        draft: false
+        file: tmp.txt
 
 
 before_deploy:
