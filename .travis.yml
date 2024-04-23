@@ -7,10 +7,6 @@ jobs:
       os: linux
       dist: jammy
 
-      script:
-        - mkdir out
-        - "echo Temp file used in CI > out/tmp.txt"
-
       deploy: &github_deploy_base
         provider: releases
         name: $TRAVIS_TAG
@@ -54,9 +50,6 @@ jobs:
       os: linux
       dist: jammy
 
-      script:
-        - mkdir out
-        - "echo Temp file used in CI > out/tmp.txt"
       deploy:
         <<: *github_deploy_base
         draft: false
@@ -64,6 +57,7 @@ jobs:
 
 before_script:
   - mkdir out
+  - echo "Temp file used in CI" > out/tmp.txt
 
 before_deploy:
   - git config --local user.name "Eshark"
