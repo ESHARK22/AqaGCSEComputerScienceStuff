@@ -65,7 +65,7 @@ before_deploy:
   - export TRAVIS_TAG="build-$TRAVIS_BUILD_NUMBER"
   - echo "Tagging commit ${TRAVIS_COMMIT} with tag ${TRAVIS_TAG}"
   - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
-  - ls out/
+  # - ls out/
 
 cache: 
   - cargo
