@@ -20,31 +20,34 @@ jobs:
         file: 
           - out/tmp.txt
 
+
     - stage: "Compile for amd64 Windows"
       arch: amd64
       os: windows
-      
-      script:
-        - cargo build -Z unstable-options --verbose --release --bins --out-dir ./out
-        - rm out/*.pdb 
-        - powershell -Command '(Get-ChildItem -File) | Rename-Item -NewName {$_.Name -replace "^","Windows_amd64_"}'
+
+      after_script:
+        - powershell -Command  cp target/release/*.exe out/
+        - powershell -Command  Get-ChildItem | rename-item -NewName { "AMD64_Windows_" + $_.Name }
+
       deploy:
         <<: *github_deploy_base
         file_glob: true
         file: out/*
     
+
     - stage: "Compile for amd64 GNU/Linux"
       arch: amd64
       os: linux
       dist: jammy
+      
+      after_script:
+        - find target/release/ -maxdepth 1 -type f -executable -exec cp {} out \;
 
-      script:
-        - cargo build -Z unstable-options --verbose --release --bins --out-dir ./out
-        - cd out; for f in * ; do mv -- "$f" "Linux_amd64_$f" ; done
       deploy:
         <<: *github_deploy_base
         file_glob: true
         file: out/*
+
 
     - stage: "Deploy - GitHub Release"
       os: linux
@@ -59,13 +62,16 @@ before_script:
   - mkdir out
   - echo "Temp file used in CI" > out/tmp.txt
 
+script:
+  - cargo build --verbose --release --bins 
+
 before_deploy:
   - git config --local user.name "Eshark"
   - git config --local user.email "eshark@eshark.tech"
   - export TRAVIS_TAG="build-$TRAVIS_BUILD_NUMBER"
   - echo "Tagging commit ${TRAVIS_COMMIT} with tag ${TRAVIS_TAG}"
   - git tag "$TRAVIS_TAG" "$TRAVIS_COMMIT"
-  # - ls out/
+  - ls out/
 
 cache: 
   - cargo
