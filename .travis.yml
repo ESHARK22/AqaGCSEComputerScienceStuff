@@ -11,7 +11,7 @@ jobs:
       os: linux
       dist: jammy
       language: bash
-      script: "Override the default script"
+      script: "echo Override the default script"
 
       deploy: &github_deploy_base
         provider: releases
@@ -33,7 +33,7 @@ jobs:
 
       after_success:
         - powershell -Command  cp target/release/*.exe out/
-        - powershell -Command  Get-ChildItem | rename-item -NewName { "AMD64_Windows_" + $_.Name }
+        - powershell -Command  Invoke-Expression "Get-ChildItem | rename-item -NewName { 'AMD64_Windows_'+ $_.Name }"
 
       deploy:
         <<: *github_deploy_base
@@ -60,7 +60,7 @@ jobs:
       os: linux
       dist: jammy
 
-      script: "Override the default script"
+      script: "echo Override the default script"
 
       deploy:
         <<: *github_deploy_base
