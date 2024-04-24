@@ -56,7 +56,7 @@ jobs:
       deploy:
         <<: *github_deploy_base
         draft: false
-        file: out/tmp.txt
+
 
 before_script:
   - mkdir out
