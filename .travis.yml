@@ -48,7 +48,7 @@ jobs:
       
       after_success:
         - cd target/release/; find * -maxdepth 0 -type f -executable -exec cp {} ../../out/AMD64_Linux_{} \;
-
+        - ls /home/travis/build/ESHARK22/AqaGCSEComputerScienceStuff/out
       deploy:
         <<: *github_deploy_base
         file_glob: true
