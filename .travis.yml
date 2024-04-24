@@ -1,6 +1,10 @@
 language: rust
 rust: nightly
 
+branches:
+  except:
+    - branch =~ build-\d
+
 jobs:
   include:
     - stage: "Setup Deploy - Github Releases"
