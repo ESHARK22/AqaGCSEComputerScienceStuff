@@ -2,7 +2,7 @@ language: rust
 rust: nightly
 
 branches:
-  include:
+  only:
     - main
 
 jobs:
