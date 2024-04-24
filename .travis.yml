@@ -25,7 +25,7 @@ jobs:
       arch: amd64
       os: windows
 
-      after_script:
+      after_success:
         - powershell -Command  cp target/release/*.exe out/
         - powershell -Command  Get-ChildItem | rename-item -NewName { "AMD64_Windows_" + $_.Name }
 
@@ -41,7 +41,7 @@ jobs:
       os: linux
       dist: jammy
       
-      after_script:
+      after_success:
         - find target/release/ -maxdepth 1 -type f -executable -exec cp {} out \;
 
       deploy:
