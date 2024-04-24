@@ -15,7 +15,7 @@ jobs:
         on:
           all_branches: true
         draft: true
-        overwrite: true
+        overwrite: false
         skip_cleanup: true  
         file: 
           - out/tmp.txt
@@ -32,6 +32,7 @@ jobs:
       deploy:
         <<: *github_deploy_base
         file_glob: true
+        skip_cleanup: true  
         file: out/*
     
 
@@ -45,6 +46,7 @@ jobs:
 
       deploy:
         <<: *github_deploy_base
+        skip_cleanup: true  
         file_glob: true
         file: out/*
 
@@ -56,6 +58,9 @@ jobs:
       deploy:
         <<: *github_deploy_base
         draft: false
+        skip_cleanup: true  
+        file_glob: true
+        file: out/*
 
 
 before_script:
