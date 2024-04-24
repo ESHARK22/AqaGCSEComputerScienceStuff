@@ -2,8 +2,8 @@ language: rust
 rust: nightly
 
 branches:
-  except:
-    - branch =~ build-.*
+  include:
+    - main
 
 jobs:
   include:
