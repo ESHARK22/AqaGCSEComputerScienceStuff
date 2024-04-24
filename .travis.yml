@@ -3,7 +3,7 @@ rust: nightly
 
 branches:
   except:
-    - branch =~ build-\d
+    - branch =~ build-.*
 
 jobs:
   include:
