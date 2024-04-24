@@ -33,7 +33,8 @@ jobs:
 
       after_success:
         - cd target/release/; find * -maxdepth 0 -type f -executable -exec cp {} ../../out/AMD64_Linux_{} \;
-      
+        - cd -
+
       deploy:
         <<: *github_deploy_base
         file_glob: true
@@ -47,7 +48,7 @@ jobs:
       
       after_success:
         - cd target/release/; find * -maxdepth 0 -type f -executable -exec cp {} ../../out/AMD64_Linux_{} \;
-
+        - cd -
       deploy:
         <<: *github_deploy_base
         file_glob: true
