@@ -6,6 +6,8 @@ jobs:
     - stage: "Setup Deploy - Github Releases"
       os: linux
       dist: jammy
+      language: bash
+      script: "Override the default script"
 
       deploy: &github_deploy_base
         provider: releases
@@ -32,7 +34,6 @@ jobs:
       deploy:
         <<: *github_deploy_base
         file_glob: true
-        skip_cleanup: true  
         file: out/*
     
 
@@ -46,19 +47,20 @@ jobs:
 
       deploy:
         <<: *github_deploy_base
-        skip_cleanup: true  
         file_glob: true
         file: out/*
 
 
     - stage: "Deploy - GitHub Release"
+      language: bash
       os: linux
       dist: jammy
+
+      script: "Override the default script"
 
       deploy:
         <<: *github_deploy_base
         draft: false
-        skip_cleanup: true  
         file_glob: true
         file: out/*
 
