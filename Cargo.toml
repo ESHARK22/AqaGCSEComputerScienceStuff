@@ -3,5 +3,6 @@ resolver = "2"
 
 members = [
     "unit02_01-easter_programming_challenges", 
-    "unit02_03_1a-defensive_design"
+    "unit02_03_1a-defensive_design", 
+    "unit02_03_1b-defensive_design"
 ]
