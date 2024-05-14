@@ -291,7 +291,7 @@ fn task_5() {
 fn task_6() {
     println!(
         "
-        *** Task 5 ***
+        *** Task 6 ***
         The Easter bunny visits 4 houses in a row, dropping off eggs. Write a program
         that asks for the number of eggs dropped at each house and prints the house 
         that got the most eggs. If two or more houses got the same highest number of 
