@@ -5,7 +5,7 @@ pub mod input_handlers {
         Write
     };
 
-    pub fn input(prompt: &'static str) -> String {
+    pub fn input(prompt: impl AsRef<str> + std::fmt::Display) -> String {
 
         loop {
             print!("{prompt}");
@@ -36,7 +36,7 @@ pub mod input_handlers {
         }
     }
 
-    pub fn int_input(prompt: &'static str) -> usize {
+    pub fn int_input(prompt: impl AsRef<str> + std::fmt::Display) -> usize {
         loop {
             let str_input = input(&prompt);
 
@@ -55,7 +55,7 @@ pub mod input_handlers {
         }
     }
 
-    pub fn yes_no_input(prompt: &'static str) -> bool {
+    pub fn yes_no_input(prompt: impl AsRef<str> + std::fmt::Display) -> bool {
         // Yes -> True
         // No  -> False
 
