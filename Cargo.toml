@@ -2,8 +2,9 @@
 resolver = "2"
 
 members = [
+    "general",
     "Unit02_01-EasterProgrammingChallenges",
     "Unit02_02-Practise1-Selection",
     "Unit02_03_1a-DefensiveDesign",
-    "Unit02_03_1b-DefensiveDesign"
+    "Unit02_03_1b-DefensiveDesign" 
 ]
