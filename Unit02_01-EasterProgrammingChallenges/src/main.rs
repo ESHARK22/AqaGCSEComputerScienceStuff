@@ -2,6 +2,11 @@ use std::io;
 use std::io::Write;
 use std::collections::HashMap;
 
+use general::input_handlers::{
+    input,
+    int_input
+};
+
 use dialoguer::{
     theme::ColorfulTheme, 
     Select
@@ -63,55 +68,6 @@ fn main() {
 
 }
 
-fn input(prompt: &String) -> String {
-
-    loop {
-        print!("{prompt}");
-
-        // Flush stdout, since its a new line buffer, but we are not printing a new line
-        if let Err(error) = io::stdout().flush() {
-            // Print the error message and go to the next iteration
-            println!("error: {error}", );
-            println!("Try again...\n");
-            continue
-        }
-
-        // Clear the buffer
-        let mut inp_buffer = String::new();
-
-        // Read stdin into the "buffer"
-        match io::stdin().read_line(&mut inp_buffer) {
-            Ok(_) => {
-                return inp_buffer;
-            }
-            Err(error) => {
-                // Print the error message and go to the next iteration
-                println!("error: {error}", );
-                println!("Try again...\n");
-                continue
-            }
-        }
-    }
-}
-
-fn int_input(prompt: &String) -> usize {
-    loop {
-        let str_input = input(&prompt);
-
-        let int_input = str_input.trim().parse::<usize>();
-        match int_input {
-            Ok(int) => {
-                return int;
-            }
-            Err(error) => {
-                println!("error: {error} \nTry again...");
-                continue    // Try again
-            }
-        }
-
-    }
-}
-
 fn task_1() {
     println!(
         "
@@ -129,7 +85,7 @@ fn task_1() {
     
     while input_day != 6 {
 
-        let eggs = int_input(&format!("How many egges did you collect on day {input_day}? "));
+        let eggs = int_input(format!("How many egges did you collect on day {input_day}?"));
 
         collected_eggs += eggs;
         input_day +=1;
@@ -170,14 +126,14 @@ fn task_2() {
             }
         };
 
-        let eggs = int_input(&format!("How many {egg_type} eggs per basket? "));
+        let eggs = int_input(format!("How many {egg_type} eggs per basket? "));
 
         *egg_var += eggs;
         collected += 1
         
     }
 
-    let num_baskets = int_input(&String::from("How many baskets would you like? "));
+    let num_baskets = int_input("How many baskets would you like? ");
 
     let total_choco = num_choco * num_baskets;
     let total_gold  = num_gold * num_baskets;
@@ -220,7 +176,7 @@ fn task_3() {
             }
         };
 
-        let mins = int_input(&format!("How many minuites did you spend on the {day_str} day? "));
+        let mins = int_input(format!("How many minuites did you spend on the {day_str} day? "));
 
         total_mins += mins;
         collected_day += 1
@@ -250,7 +206,7 @@ fn task_4() {
         "
     );
 
-    let num_of_eggs_per_basket = int_input(&String::from("How many eggs do you have? "));
+    let num_of_eggs_per_basket = int_input("How many eggs do you have? ");
     let baskets = 5_usize;
     
     let remaining_eggs = num_of_eggs_per_basket % baskets;
@@ -276,7 +232,7 @@ fn task_5() {
     
     for x in 0..5 {
         let bunny_num = x+1;
-        let eggs = int_input(&String::from(format!("How many eggs can bunny {bunny_num} prepare in 1 day? ")));
+        let eggs = int_input(format!("How many eggs can bunny {bunny_num} prepare in 1 day? "));
         helpers_eggs_per_day[x] = eggs;
     }
 
@@ -302,7 +258,7 @@ fn task_6() {
     let mut eggs_in_houses = HashMap::new();
 
     for house_num in 1..5 {
-        let eggs = int_input(&String::from(format!("How many eggs got dropped at house {house_num}? ")));
+        let eggs = int_input(format!("How many eggs got dropped at house {house_num}? "));
         eggs_in_houses.insert(house_num as usize, eggs);
     }
 
@@ -340,7 +296,7 @@ fn task_7() {
         "
     );    
 
-    let num_of_asterix = int_input(&String::from("How many asterix's would you like? "));
+    let num_of_asterix = int_input("How many asterix's would you like? ");
     for x in 0..num_of_asterix+1 {
         println!("{:*<1$}", "", x);
     }
@@ -367,7 +323,7 @@ fn task_8() {
     let mut end_min    : usize;
 
     loop {
-        start_hour = int_input(&String::from("What hour did the Easter egg hunt start? "));
+        start_hour = int_input("What hour did the Easter egg hunt start? ");
         if !(start_hour <= 24) {
             println!("Hmmm...You must be living on another planet...");
             println!("Try again...");
@@ -377,7 +333,7 @@ fn task_8() {
     }
 
     loop {
-        start_min = int_input(&String::from("What minuite did the Easter egg hunt start? "));
+        start_min = int_input("What minuite did the Easter egg hunt start? ");
         if !(start_min <= 60) {
             println!("Hmmm...You must be living on another planet...");
             println!("Try again...");
@@ -387,7 +343,7 @@ fn task_8() {
     }
 
     loop {
-        end_hour = int_input(&String::from("What hour did the Easter egg hunt end? "));
+        end_hour = int_input("What hour did the Easter egg hunt end? ");
         if !(end_hour <= 24) {
             println!("Hmmm...You must be living on another planet...");
             println!("Try again...");
@@ -400,7 +356,7 @@ fn task_8() {
     }
 
     loop {
-        end_min = int_input(&String::from("What minuite did the Easter egg hunt end? "));
+        end_min = int_input("What minuite did the Easter egg hunt end? ");
         if !(end_min <= 60) {
             println!("Hmmm...You must be living on another planet...");
             println!("Try again...");
@@ -436,7 +392,7 @@ fn task_9() {
 
     for race_index in 0..4 {
         let parcipitant = race_index as usize + 1;
-        let time = int_input(&String::from(format!("What time (s) did participant {parcipitant} take? ")));
+        let time = int_input(format!("What time (s) did participant {parcipitant} take? "));
         race_times.insert(parcipitant, time);
     }
 
@@ -477,7 +433,7 @@ fn task_10() {
 
     // Ifmmp Xpsme! = Hello World!
 
-    let encoded_mesage = input(&String::from("Enter the encoded message: "));
+    let encoded_mesage = input("Enter the encoded message: ");
     let mut decoded_message = String::new();
 
     for ch in encoded_mesage.chars() {
