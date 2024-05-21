@@ -1,4 +1,4 @@
-use general::input_handlers::{yes_no_input};
+use general::input_handlers::yes_no_input;
 
 fn main() {
     println!("Task:
