@@ -1,3 +1,8 @@
+use std::{
+    io,
+    io::Write
+};
+
 use general::input_handlers::{
     input,
     int_input
