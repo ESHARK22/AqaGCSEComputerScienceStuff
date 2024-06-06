@@ -1,5 +1,3 @@
-use std::io;
-use std::io::Write;
 use std::collections::HashMap;
 
 use general::input_handlers::{
@@ -61,9 +59,8 @@ fn main() {
 
         }
 
-        print!("\n    Press enter to return back to the main menu...");
-        io::stdout().flush().unwrap_or({});
-        io::stdin().read_line(&mut String::new()).unwrap_or(0);
+        println!();
+        input("Press enter to return to the main menu!");
     }
 
 }

@@ -1,13 +1,18 @@
-use std::io;
-use std::io::Write;
+use general::input_handlers::{
+    input,
+    int_input
+};
 
 use dialoguer::{
     theme::ColorfulTheme, 
     Select
 };
 
-use chrono::{self, Local};
-use chrono::NaiveDate;
+use chrono::{
+    self, 
+    Local, 
+    NaiveDate
+};
 
 fn main() {
     // task_1()
@@ -51,55 +56,6 @@ fn main() {
     
 }
 
-
-fn input(prompt: &'static str) -> String {
-
-    loop {
-        print!("{prompt}");
-
-        // Flush stdout, since its a new line buffer, but we are not printing a new line
-        if let Err(error) = io::stdout().flush() {
-            // Print the error message and go to the next iteration
-            println!("error: {error}", );
-            println!("Try again...\n");
-            continue
-        }
-
-        // Clear the buffer
-        let mut inp_buffer = String::new();
-
-        // Read stdin into the "buffer"
-        match io::stdin().read_line(&mut inp_buffer) {
-            Ok(_) => {
-                return inp_buffer;
-            }
-            Err(error) => {
-                // Print the error message and go to the next iteration
-                println!("error: {error}", );
-                println!("Try again...\n");
-                continue
-            }
-        }
-    }
-}
-
-fn int_input(prompt: &'static str) -> usize {
-    loop {
-        let str_input = input(&prompt);
-
-        let int_input = str_input.trim().parse::<usize>();
-        match int_input {
-            Ok(int) => {
-                return int;
-            }
-            Err(error) => {
-                println!("error: {error} \nTry again...");
-                continue    // Try again
-            }
-        }
-
-    }
-}
 
 fn task_1() {
     // Write a program that asks the user to enter a number between 0 and 100 only. 
