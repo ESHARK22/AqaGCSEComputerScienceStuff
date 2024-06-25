@@ -1,0 +1,18 @@
+[package]
+name = "MainMenu"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Local Projects
+Connect4 = { version = "0.1.0", path = "../Projects/Connect4" }
+EasterChallenges = { version = "0.1.0", path = "../Projects/EasterChallenges" }
+InputHandlers = { version = "0.1.0", path = "../InputHandlers" }
+
+# Local Units
+Unit2-02-SelectionPractise = { version = "0.1.0", path = "../Units/Unit2-02-SelectionPractise" }
+Unit2-03-DefensiveDesignA = { version = "0.1.0", path = "../Units/Unit2-03-DefensiveDesignA" }
+Unit2-03-DefensiveDesignB = { version = "0.1.0", path = "../Units/Unit2-03-DefensiveDesignB" }
+
+# Other stuff
+dialoguer = "0.11.0"

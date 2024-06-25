@@ -1,0 +1,8 @@
+[package]
+name = "Unit2-03-DefensiveDesignB"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+InputHandlers = { version = "0.1.0", path = "../../InputHandlers" }
+rand = "0.8.5"

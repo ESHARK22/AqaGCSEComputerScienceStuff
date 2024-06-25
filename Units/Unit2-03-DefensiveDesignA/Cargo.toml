@@ -1,0 +1,9 @@
+[package]
+name = "Unit2-03-DefensiveDesignA"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+InputHandlers = { version = "0.1.0", path = "../../InputHandlers" }
+chrono = "0.4.38"
+dialoguer = "0.11.0"
